@@ -9,7 +9,7 @@ export default Header = ({ actionButton, children }) => {
 
     return (
         <Layout style={styles.headerContainer}>
-            <Text category='h1'>{children}</Text>
+            <Text category='h1' style={styles.headerText}>{children}</Text>
             {actionButton === 'close' ? <CloseButton /> : <SettingsButton />}
         </Layout>
     )
@@ -32,5 +32,9 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 5,
         zIndex: 1,
+    },
+    headerText: {
+        paddingHorizontal: 10,
+        fontSize: 40
     }
 })

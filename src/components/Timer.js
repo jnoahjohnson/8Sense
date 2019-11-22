@@ -15,6 +15,18 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
     useEffect(() => {
         startTimer();
 
+        var Sound = require('react-native-sound');
+        Sound.setCategory('Playback');
+
+        sound = new Sound('chime_tone.mp3', Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                console.log('failed to load the sound', error);
+                return;
+            }
+            // loaded successfully
+            console.log('duration in seconds: ' + sound.getDuration() + 'number of channels: ' + sound.getNumberOfChannels());
+        });
+
         return function cleanup() {
             stopTimer();
         }
@@ -22,6 +34,14 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
 
     playSound = () => {
         console.log('BEEP!');
+        // Play the sound with an onEnd callback
+        sound.play((success) => {
+            if (success) {
+                console.log('successfully finished playing');
+            } else {
+                console.log('playback failed due to audio decoding errors');
+            }
+        });
     }
 
     getTime = () => {
@@ -33,7 +53,7 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
             goToNextSense();
             return (timerState);
         } else if (seconds === 0 && !isPaused) {
-            seconds = "60";
+            seconds = "59";
             if (minutes != 0) {
                 minutes--;
             };
@@ -102,6 +122,8 @@ const styles = StyleSheet.create({
     },
     timerText: {
         marginTop: 'auto',
+        paddingTop: 10,
+        fontSize: 60
     },
     buttonContainer: {
         flexDirection: 'row',

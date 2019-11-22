@@ -1,12 +1,46 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Picker } from 'react-native';
-import { Layout, Text, Button } from 'react-native-ui-kitten';
+import { Layout, Text, Button, Select } from 'react-native-ui-kitten';
 import Header from '../components/Header';
 import SenseContext from '../context/SenseContext';
 
 export default SettingsScreen = () => {
     const { timerState, setTimerState } = useContext(SenseContext);
-    const [timerSetting, setTimerSetting] = useState(timerState);
+    const [minutes, setMinutes] = useState({ text: timerState.minutes.toString() });
+    const [seconds, setSeconds] = useState({ text: timerState.seconds.toString() });
+
+    const [settingStatus, setSettingStatus] = useState(true);
+
+    const timerLengthMinutes = [
+        { text: '0' },
+        { text: '1' },
+        { text: '2' },
+        { text: '3' },
+        { text: '4' },
+    ]
+
+    const timerLengthSeconds = [
+        { text: '0' },
+        { text: '5' },
+        { text: '10' },
+        { text: '15' },
+        { text: '20' },
+        { text: '25' },
+        { text: '30' },
+        { text: '35' },
+        { text: '40' },
+        { text: '45' },
+        { text: '50' },
+        { text: '55' },
+    ]
+
+    useEffect(() => {
+        if (minutes.text === timerState.minutes.toString() && seconds.text === timerState.seconds.toString()) {
+            setSettingStatus(true);
+        } else {
+            setSettingStatus(false);
+        }
+    });
 
     return (
         <>
@@ -20,46 +54,26 @@ export default SettingsScreen = () => {
                 <Text style={styles.settingHeader} category='h2'>Time per Sense</Text>
                 <Layout style={styles.pickerContainer}>
                     <Layout style={styles.picker}>
-                        <Picker
-                            selectedValue={timerSetting.minutes}
-                            style={styles.pickerStyle}
-                            onValueChange={(minutes) => {
-                                setTimerSetting({ minutes, seconds: timerSetting.seconds })
-                            }
-                            }
-                        >
-                            <Picker.Item label="0" value={0} />
-                            <Picker.Item label="1" value={1} />
-                            <Picker.Item label="2" value={2} />
-                            <Picker.Item label="3" value={3} />
-                            <Picker.Item label="4" value={4} />
-                            <Picker.Item label="5" value={5} />
-                        </Picker>
+                        <Select
+                            data={timerLengthMinutes}
+                            placeholder={minutes}
+                            selectedOption={minutes}
+                            onSelect={selectedOption => {
+                                setMinutes(selectedOption)
+                            }}
+                        />
                         <Text style={styles.pickerLabel} category='h3'>Minutes</Text>
                     </Layout>
 
                     <Layout style={styles.picker}>
-                        <Picker
-                            selectedValue={timerSetting.seconds}
-                            style={styles.pickerStyle}
-                            onValueChange={(seconds) => {
-                                setTimerSetting({ minutes: timerSetting.minutes, seconds })
-                            }
-                            }
-                        >
-                            <Picker.Item label="0" value={0} />
-                            <Picker.Item label="5" value={5} />
-                            <Picker.Item label="10" value={10} />
-                            <Picker.Item label="15" value={15} />
-                            <Picker.Item label="20" value={20} />
-                            <Picker.Item label="25" value={25} />
-                            <Picker.Item label="30" value={30} />
-                            <Picker.Item label="35" value={35} />
-                            <Picker.Item label="40" value={40} />
-                            <Picker.Item label="45" value={45} />
-                            <Picker.Item label="50" value={50} />
-                            <Picker.Item label="55" value={55} />
-                        </Picker>
+                        <Select
+                            data={timerLengthSeconds}
+                            placeholder={seconds}
+                            selectedOption={seconds}
+                            onSelect={selectedOption => {
+                                setSeconds(selectedOption)
+                            }}
+                        />
                         <Text style={styles.pickerLabel} category='h3'>Seconds</Text>
                     </Layout>
 
@@ -67,9 +81,11 @@ export default SettingsScreen = () => {
 
                 <Layout style={styles.saveButtonContainer}>
                     <Button
-                        onPress={() => setTimerState({ minutes: timerSetting.minutes, seconds: timerSetting.seconds })}
+                        onPress={() => setTimerState({ minutes: minutes.text, seconds: seconds.text })}
                         status='basic'
-                        style={styles.saveButton}>
+                        style={styles.saveButton}
+                        disabled={settingStatus}
+                    >
                         Save
                     </Button>
                 </Layout>
@@ -93,7 +109,8 @@ const styles = StyleSheet.create({
     pickerContainer: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginVertical: 30
     },
     picker: {
         display: 'flex',
@@ -101,7 +118,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     pickerLabel: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: 10
     },
     settingHeader: {
         marginTop: 40
