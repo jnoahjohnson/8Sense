@@ -16,6 +16,8 @@
 		4F99FE8323887FDD004D6B12 /* chime_tone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4F99FE8123887FDD004D6B12 /* chime_tone.mp3 */; };
 		4F99FE85238880DB004D6B12 /* chime_transition.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4F99FE84238880DB004D6B12 /* chime_transition.m4a */; };
 		4F99FE86238880DB004D6B12 /* chime_transition.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4F99FE84238880DB004D6B12 /* chime_transition.m4a */; };
+		4F99FE88238885F9004D6B12 /* AppCenter-config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F99FE87238885F9004D6B12 /* AppCenter-config.plist */; };
+		4F99FE89238885F9004D6B12 /* AppCenter-config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F99FE87238885F9004D6B12 /* AppCenter-config.plist */; };
 		6E4B92AE2A484DC53E6BE4E2 /* libPods-EightSenseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5E438D6EC4E7B36857049D /* libPods-EightSenseTests.a */; };
 		920872CCEBB652AAEFC521FB /* libPods-EightSense.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B33398049760F8830526890C /* libPods-EightSense.a */; };
 /* End PBXBuildFile section */
@@ -49,6 +51,7 @@
 		4030D03DF0EF38A4F1FC9DFB /* Pods-EightSense-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EightSense-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-EightSense-tvOSTests/Pods-EightSense-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F99FE8123887FDD004D6B12 /* chime_tone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime_tone.mp3; sourceTree = "<group>"; };
 		4F99FE84238880DB004D6B12 /* chime_transition.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = chime_transition.m4a; sourceTree = "<group>"; };
+		4F99FE87238885F9004D6B12 /* AppCenter-config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-config.plist"; sourceTree = "<group>"; };
 		53D2DD7094B828C00BC05851 /* Pods-EightSense-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EightSense-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EightSense-tvOS/Pods-EightSense-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7C17C0D418275431A52ABAFC /* Pods-EightSenseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EightSenseTests.debug.xcconfig"; path = "Target Support Files/Pods-EightSenseTests/Pods-EightSenseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		92A8DE550A0CF9F87E42F335 /* libPods-EightSense-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EightSense-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +152,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4F99FE87238885F9004D6B12 /* AppCenter-config.plist */,
 				4F99FE84238880DB004D6B12 /* chime_transition.m4a */,
 				4F99FE8123887FDD004D6B12 /* chime_tone.mp3 */,
 				13B07FAE1A68108700A75B9A /* EightSense */,
@@ -259,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F99FE89238885F9004D6B12 /* AppCenter-config.plist in Resources */,
 				4F99FE86238880DB004D6B12 /* chime_transition.m4a in Resources */,
 				4F99FE8323887FDD004D6B12 /* chime_tone.mp3 in Resources */,
 			);
@@ -272,6 +277,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				4F99FE8223887FDD004D6B12 /* chime_tone.mp3 in Resources */,
+				4F99FE88238885F9004D6B12 /* AppCenter-config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

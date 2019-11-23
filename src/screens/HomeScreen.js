@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Button, Layout, Text } from 'react-native-ui-kitten';
+import { Button, Layout } from 'react-native-ui-kitten';
 import SettingsButton from '../components/SettingsButton';
 
 

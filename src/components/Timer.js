@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import SenseContext from "../context/SenseContext";
 import { Icon, Text } from 'react-native-ui-kitten';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense }) => {
     //Setup the State and Context
@@ -102,7 +101,10 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
                     </TouchableOpacity>
                     : <View style={{ width: 50 }} />}
 
-                <TouchableOpacity onPress={() => timerButton()}>
+                <TouchableOpacity onPress={() => {
+                    timerButton()
+                    console.log('pressed Play/Pause');
+                }}>
                     <Icon name={isPaused ? "play-circle-outline" : "pause-circle-outline"} style={styles.playIcon} fill={'#e5e5e5'} />
                 </TouchableOpacity>
 

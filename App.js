@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import HomeScreen from './src/screens/HomeScreen';
-import { SenseProvider } from "./src/context/SenseContext";
+import SenseContext, { SenseProvider } from "./src/context/SenseContext";
 import SenseScreen from './src/screens/SenseScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
 //UI Kitten
-import { mapping, light as lightTheme, dark as darkTheme } from '@eva-design/eva';
+import { mapping, light } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
 
 //My Themes
-import { newDark } from './src/themes/newDark';
+import { newDark as dark } from './src/themes/newDark';
 
 const navigator = createStackNavigator({
   Home: HomeScreen,
@@ -25,14 +25,24 @@ const navigator = createStackNavigator({
   }
 });
 
-const App = createAppContainer(navigator);
+const AppContainer = createAppContainer(navigator);
+
+const App = () => {
+
+
+  return (
+    <AppContainer />
+  )
+}
 
 export default () => {
+  const themes = { light, dark };
+  const [theme, setTheme] = useState('light');
+
   return (
     <SenseProvider>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider mapping={mapping} theme={newDark}>
-
+      <ApplicationProvider mapping={mapping} theme={dark}>
         <App />
       </ApplicationProvider>
     </SenseProvider>

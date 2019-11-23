@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Picker } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Layout, Text, Button, Select } from 'react-native-ui-kitten';
 import Header from '../components/Header';
 import SenseContext from '../context/SenseContext';
@@ -59,7 +59,7 @@ export default SettingsScreen = () => {
                             placeholder={minutes}
                             selectedOption={minutes}
                             onSelect={selectedOption => {
-                                setMinutes(selectedOption)
+                                setMinutes(selectedOption);
                             }}
                         />
                         <Text style={styles.pickerLabel} category='h3'>Minutes</Text>
@@ -81,7 +81,7 @@ export default SettingsScreen = () => {
 
                 <Layout style={styles.saveButtonContainer}>
                     <Button
-                        onPress={() => setTimerState({ minutes: minutes.text, seconds: seconds.text })}
+                        onPress={() => setTimerState({ minutes: Number(minutes.text), seconds: Number(seconds.text) })}
                         status='basic'
                         style={styles.saveButton}
                         disabled={settingStatus}
