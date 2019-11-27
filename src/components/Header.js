@@ -18,7 +18,7 @@ export default Header = ({ actionButton, children }) => {
 const styles = StyleSheet.create({
     headerContainer: {
         paddingHorizontal: 20,
-        paddingTop: 60,
+        paddingTop: Platform.OS === 'android' ? 40 : 60,
         paddingBottom: 20,
         flexDirection: 'row',
         alignItems: 'center',
