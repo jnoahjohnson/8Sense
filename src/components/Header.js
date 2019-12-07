@@ -18,8 +18,8 @@ export default Header = ({ actionButton, children }) => {
 const styles = StyleSheet.create({
     headerContainer: {
         paddingHorizontal: 20,
-        paddingTop: Platform.OS === 'android' ? 40 : 60,
-        paddingBottom: 20,
+        paddingTop: Platform.OS === 'android' ? 50 : 60,
+        paddingBottom: 25,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#346666',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     headerText: {
-        paddingHorizontal: 10,
-        fontSize: 40
+        fontSize: 45,
+        fontWeight: '400'
     }
 })

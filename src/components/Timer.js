@@ -17,7 +17,7 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
         var Sound = require('react-native-sound');
         Sound.setCategory('Playback');
 
-        sound = new Sound('chime_tone.mp3', Sound.MAIN_BUNDLE, (error) => {
+        sound = new Sound('chime.mp3', Sound.MAIN_BUNDLE, (error) => {
             if (error) {
                 console.log('failed to load the sound', error);
                 return;
@@ -97,19 +97,19 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
             <View style={styles.buttonContainer}>
                 {showBackButton
                     ? <TouchableOpacity onPress={() => previousSenseButton()}>
-                        <Icon name="arrow-ios-back-outline" style={styles.controlIcons} visible={showBackButton} fill={'#e5e5e5'} />
+                        <Icon name="arrow-left" style={styles.controlIcons} visible={showBackButton} fill={'#e5e5e5'} />
                     </TouchableOpacity>
-                    : <View style={{ width: 80 }} />}
+                    : <View style={{ width: 50 }} />}
 
                 <TouchableOpacity onPress={() => {
                     timerButton()
                     console.log('pressed Play/Pause');
                 }}>
-                    <Icon name={isPaused ? "play-circle-outline" : "pause-circle-outline"} style={styles.playIcon} fill={'#e5e5e5'} />
+                    <Icon strokeWidth=".1" name={isPaused ? "control-play" : "control-pause"} style={styles.playIcon} fill={'#e5e5e5'} />
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => goToNextSense()}>
-                    <Icon name="arrow-ios-forward-outline" style={styles.controlIcons} fill={'#e5e5e5'} />
+                    <Icon name="arrow-right" style={styles.controlIcons} fill={'#e5e5e5'} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -125,7 +125,15 @@ const styles = StyleSheet.create({
     timerText: {
         marginTop: 'auto',
         paddingTop: 150,
-        fontSize: 100
+        fontSize: 100,
+        ...Platform.select({
+            ios: {
+                fontWeight: '200',
+            },
+            android: {
+                fontFamily: 'sans-serif-light'
+            }
+        })
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -134,15 +142,17 @@ const styles = StyleSheet.create({
         marginBottom: 70
     },
     playIcon: {
-        width: 110,
-        height: 110,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20
-    },
-    controlIcons: {
         width: 80,
         height: 80,
-        marginTop: 20
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20,
+        color: '#e5e5e5'
+    },
+    controlIcons: {
+        width: 50,
+        height: 50,
+        marginTop: 20,
+        color: '#e5e5e5'
     }
 });

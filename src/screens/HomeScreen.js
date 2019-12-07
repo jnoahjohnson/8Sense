@@ -46,10 +46,11 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 20,
-        width: 175,
+        width: 175
     },
     buttonText: {
         fontSize: 20,
+        fontWeight: '400'
     }
 });
 

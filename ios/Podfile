@@ -36,6 +36,9 @@ target 'EightSense' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'EightSenseTests' do
     inherit! :search_paths
     # Pods for testing

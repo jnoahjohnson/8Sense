@@ -9,7 +9,7 @@ const CloseButton = ({ navigation }) => {
             <TouchableOpacity
                 onPress={() => navigation.navigate('Home')}
             >
-                <Icon name="close-outline" style={{ width: 40, height: 40 }} fill={'#e5e5e5'} />
+                <Icon name="close" style={{ width: 30, height: 30, color: '#e5e5e5' }} />
             </TouchableOpacity>
         </View>
     );

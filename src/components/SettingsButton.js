@@ -9,7 +9,7 @@ const SettingsButton = ({ navigation }) => {
             <TouchableOpacity
                 onPress={() => navigation.navigate('Settings')}
             >
-                <Icon name="settings-2-outline" style={{ width: 40, height: 40, }} fill={'#e5e5e5'} />
+                <Icon name="settings" style={{ width: 40, height: 40, color: '#e5e5e5' }} />
             </TouchableOpacity>
         </Layout>
     );

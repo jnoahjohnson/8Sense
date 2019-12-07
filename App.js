@@ -1,4 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import HomeScreen from './src/screens/HomeScreen';
@@ -10,6 +11,7 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import { mapping, light } from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten';
+import { SimpleIconsPack } from './src/icons/simple-icons';
 
 //My Themes
 import { newDark as dark } from './src/themes/newDark';
@@ -28,10 +30,15 @@ const navigator = createStackNavigator({
 const AppContainer = createAppContainer(navigator);
 
 const App = () => {
-
-
   return (
-    <AppContainer />
+    <>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
+      <AppContainer />
+    </>
   )
 }
 
@@ -41,7 +48,7 @@ export default () => {
 
   return (
     <SenseProvider>
-      <IconRegistry icons={EvaIconsPack} />
+      <IconRegistry icons={SimpleIconsPack} />
       <ApplicationProvider mapping={mapping} theme={dark}>
         <App />
       </ApplicationProvider>

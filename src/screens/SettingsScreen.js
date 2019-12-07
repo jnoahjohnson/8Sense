@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { Layout, Text, Button, Select } from 'react-native-ui-kitten';
 import Header from '../components/Header';
 import SenseContext from '../context/SenseContext';
 
-export default SettingsScreen = () => {
+
+const SettingsScreen = ({ navigation }) => {
     const { timerState, setTimerState } = useContext(SenseContext);
     const [minutes, setMinutes] = useState({ text: timerState.minutes.toString() });
     const [seconds, setSeconds] = useState({ text: timerState.seconds.toString() });
@@ -81,10 +83,14 @@ export default SettingsScreen = () => {
 
                 <Layout style={styles.saveButtonContainer}>
                     <Button
-                        onPress={() => setTimerState({ minutes: Number(minutes.text), seconds: Number(seconds.text) })}
+                        onPress={() => {
+                            setTimerState({ minutes: Number(minutes.text), seconds: Number(seconds.text) });
+                            navigation.navigate('Home');
+                        }}
                         status='basic'
                         style={styles.saveButton}
                         disabled={settingStatus}
+                        size='large'
                     >
                         Save
                     </Button>
@@ -130,6 +136,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     saveButton: {
-
     }
 });
+
+export default withNavigation(SettingsScreen);
