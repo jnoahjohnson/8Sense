@@ -99,7 +99,7 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
                     ? <TouchableOpacity onPress={() => previousSenseButton()}>
                         <Icon name="arrow-left" style={styles.controlIcons} visible={showBackButton} fill={'#e5e5e5'} />
                     </TouchableOpacity>
-                    : <View style={{ width: 50 }} />}
+                    : <View style={{ width: 60 }} />}
 
                 <TouchableOpacity onPress={() => {
                     timerButton()
@@ -142,16 +142,16 @@ const styles = StyleSheet.create({
         marginBottom: 70
     },
     playIcon: {
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         marginLeft: 20,
         marginRight: 20,
         marginTop: 20,
         color: '#e5e5e5'
     },
     controlIcons: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         marginTop: 20,
         color: '#e5e5e5'
     }

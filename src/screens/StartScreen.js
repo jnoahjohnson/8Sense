@@ -1,26 +1,26 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Button, Layout } from 'react-native-ui-kitten';
-import SettingsButton from '../components/SettingsButton';
+import { Button, Layout, Text } from 'react-native-ui-kitten';
+import BackButton from '../components/BackButton';
 
 
 const HomeScreen = ({ navigation }) => {
     return (
         <>
             <Layout style={styles.headerContainer}>
-                <SettingsButton />
+                <BackButton />
             </Layout>
 
             <Layout style={styles.bodyContainer}>
-                <Image source={require('../../assets/logo.png')} style={styles.mainImage} />
+                <Text category='h1'>Are You Ready?</Text>
                 <Button
-                    onPress={() => navigation.navigate('Start')}
+                    onPress={() => navigation.navigate('Sense')}
                     style={styles.button}
                     status='basic'
                     size='giant'
                     textStyle={styles.buttonText}>
-                    Begin
+                    Start Now
                 </Button>
             </Layout>
         </>

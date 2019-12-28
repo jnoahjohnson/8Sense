@@ -46,7 +46,7 @@ export const SenseProvider = ({ children }) => {
     }
 
     return (
-        <SenseContext.Provider value={{ timerState, setTimerState, senses, userTheme }}>
+        <SenseContext.Provider value={{ timerState, setTimerState, senses, userTheme, setSenses }}>
             {children}
         </SenseContext.Provider >
     )

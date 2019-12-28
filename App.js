@@ -6,6 +6,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import SenseContext, { SenseProvider } from "./src/context/SenseContext";
 import SenseScreen from './src/screens/SenseScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import StartScreen from './src/screens/StartScreen';
 
 //UI Kitten
 import { mapping, light } from '@eva-design/eva';
@@ -19,7 +20,8 @@ import { newDark as dark } from './src/themes/newDark';
 const navigator = createStackNavigator({
   Home: HomeScreen,
   Sense: SenseScreen,
-  Settings: SettingsScreen
+  Settings: SettingsScreen,
+  Start: StartScreen
 }, {
   initialRouteName: 'Home',
   defaultNavigationOptions: {
