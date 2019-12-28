@@ -36,7 +36,6 @@ target 'EightSense' do
 
 
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'EightSenseTests' do
     inherit! :search_paths
