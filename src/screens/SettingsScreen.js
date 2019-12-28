@@ -195,7 +195,7 @@ const SettingsScreen = ({ navigation }) => {
                     <DraggableFlatList
                         data={sensesData}
                         style={styles.sensesList}
-                        scrollEnabled={true}
+                        scrollEnabled={false}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item, index, drag, isActive }) => {
                             return (
