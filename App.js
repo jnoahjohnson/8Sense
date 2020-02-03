@@ -33,11 +33,6 @@ const AppContainer = createAppContainer(navigator);
 
 const App = () => {
 
-  useEffect(() => {
-    console.log('here')
-    return console.log('gone')
-  }, [])
-
   return (
     <>
       <StatusBar
