@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
@@ -32,6 +32,12 @@ const navigator = createStackNavigator({
 const AppContainer = createAppContainer(navigator);
 
 const App = () => {
+
+  useEffect(() => {
+    console.log('here')
+    return console.log('gone')
+  }, [])
+
   return (
     <>
       <StatusBar

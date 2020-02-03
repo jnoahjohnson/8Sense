@@ -45,6 +45,7 @@ const SenseScreen = ({ headerText, navigation }) => {
                     previousSense={() => previousSense()}
                     showBackButton={currentSenseIndex === 0 ? false : true}
                     isLastSense={currentSenseIndex === senses.length - 1 ? true : false}
+                    initialSense={currentSenseIndex === 0 ? true : false}
                 />
             </Layout>
         </>

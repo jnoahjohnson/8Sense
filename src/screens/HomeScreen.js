@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
             <Layout style={styles.bodyContainer}>
                 <Image source={require('../../assets/logo.png')} style={styles.mainImage} />
                 <Button
-                    onPress={() => navigation.navigate('Start')}
+                    onPress={() => navigation.navigate('Sense')}
                     style={styles.button}
                     status='basic'
                     size='giant'

@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import SenseContext from "../context/SenseContext";
 import { Icon, Text } from 'react-native-ui-kitten';
 
-export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense }) => {
+export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense, initialSense }) => {
     //Setup the State and Context
     const { timerState } = useContext(SenseContext);
     const [time, setTime] = useState(timerState);
@@ -13,6 +13,10 @@ export default Timer = ({ nextSense, previousSense, showBackButton, isLastSense 
     //Component setup
     useEffect(() => {
         startTimer();
+
+        if (initialSense) {
+            setPauseState(true);
+        }
 
         var Sound = require('react-native-sound');
         Sound.setCategory('Playback');

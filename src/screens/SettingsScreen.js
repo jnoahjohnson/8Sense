@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Layout, Text, Button, Select, Icon, Modal, Input } from 'react-native-ui-kitten';
 import DraggableFlatList from 'react-native-draggable-flatlist'
@@ -24,7 +24,10 @@ const SettingsScreen = ({ navigation }) => {
     const [addItemVisible, setAddItemVisible] = useState(false);
     const [addItemValue, setAddItemValue] = useState('');
 
-    const sensesListLength = sensesData.length > 0 ? sensesData.length + 1.3 : 2;
+    const [clickedSense, setClickedSense] = useState(null);
+    const [clickedSenseIndex, setClickedSenseIndex] = useState(null);
+
+    const [editMode, setEditMode] = useState(false);
 
     const timerLengthMinutes = [
         { text: '0' },
@@ -61,7 +64,7 @@ const SettingsScreen = ({ navigation }) => {
 
         if (sensesData.length != senses.map)
             for (let index = 0; index < sensesData.length; index++) {
-                if (sensesData[index].key !== originalSenses[index].key) {
+                if (sensesData[index].label !== originalSenses[index].label) {
                     return true;
                 }
             }
@@ -130,6 +133,59 @@ const SettingsScreen = ({ navigation }) => {
         </Layout>
     );
 
+    const renderClickedSense = () => (
+        <Layout
+            level='3'
+            style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 175,
+                width: 275,
+                paddingHorizontal: 20,
+                backgroundColor: '#151a30'
+            }}
+        >
+            <Text
+                category='h4'
+            >
+                Edit Sense
+            </Text>
+            <Input
+                value={clickedSense}
+                onChangeText={setClickedSense}
+                style={{ marginVertical: 10 }}
+            />
+            <Layout style={{ flexDirection: 'row' }}>
+                <Button
+                    style={styles.addButtonStyles}
+                    status='basic'
+                    size='medium'
+                    onPress={() => {
+                        setClickedSense(null);
+                        setClickedSenseIndex(null);
+                    }}
+                >
+                    Cancel
+                </Button>
+                <Button
+                    style={styles.addButtonStyles}
+                    status='basic'
+                    size='medium'
+                    onPress={() => {
+                        console.log(clickedSenseIndex);
+                        let sensesArray = [...sensesData];
+                        sensesArray[clickedSenseIndex].label = clickedSense;
+                        setSensesData(sensesArray);
+                        setClickedSense(null);
+                        setClickedSenseIndex(null);
+                    }}
+                >
+                    Save
+                </Button>
+            </Layout>
+        </Layout>
+    );
+
     useEffect(() => {
         let sensesChanged = checkSensesChange();
 
@@ -187,43 +243,107 @@ const SettingsScreen = ({ navigation }) => {
 
                 <Layout style={{ flex: 10 }}>
                     <Layout style={{ ...styles.settingHeader, flexDirection: 'row', alignItems: 'center' }} >
-                        <Text style={{ flex: 1 }} category='h2'>Senses</Text>
-                        <TouchableOpacity onPress={toggleAddModal} style={{ justifySelf: 'flex-end' }}>
-                            <Icon name='plus' style={{ height: 25, width: 25, color: 'white' }} />
-                        </TouchableOpacity>
+                        <Layout style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ marginRight: 15 }} category='h2'>Senses</Text>
+                            {editMode
+                                ? <TouchableOpacity onPress={toggleAddModal}>
+                                    <Icon name='plus' style={{ height: 25, width: 25, color: 'white' }} />
+                                </TouchableOpacity>
+                                : null
+                            }
+                        </Layout>
+
+                        <Layout>
+                            <Button status='basic' size='medium' onPress={() => setEditMode(!editMode)}>
+                                {editMode ? "Done" : "Edit"}
+                            </Button>
+                        </Layout>
                     </Layout>
                     <DraggableFlatList
                         data={sensesData}
                         style={styles.sensesList}
-                        scrollEnabled={false}
+                        scrollEnabled={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item, index, drag, isActive }) => {
+                            const editSense = () => {
+                                setClickedSense(item.label)
+                                console.log(index)
+                                setClickedSenseIndex(index)
+                            }
+
                             return (
-                                <TouchableOpacity
-                                    style={{
-                                        height: 30,
-                                        marginVertical: 5,
-                                        backgroundColor: isActive ? '#1a2138' : item.backgroundColor,
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
-                                        flexDirection: 'row'
-                                    }}
-                                    onLongPress={drag}
-                                >
-                                    <Text style={{
-                                        color: 'white',
-                                        fontSize: 28,
-                                        paddingVertical: 10
-                                    }}>{item.label}</Text>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            let newData = sensesData.filter(obj => obj.key !== item.key);
-                                            setSensesData(newData);
-                                        }}
-                                    >
-                                        <Icon name="trash" style={{ width: 20, height: 20, color: '#e5e5e5' }} />
-                                    </TouchableOpacity>
-                                </TouchableOpacity>
+                                <Layout>
+                                    <Layout style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center'
+                                    }}>
+                                        {editMode
+                                            ? <TouchableOpacity
+                                                onLongPress={drag}
+                                            >
+                                                <Icon name="menu" style={{ width: 20, height: 20, color: '#e5e5e5', marginRight: 15 }} />
+                                            </TouchableOpacity>
+                                            : null
+                                        }
+
+
+                                        <Layout
+                                            style={{
+                                                height: 30,
+                                                flex: 1,
+                                                marginVertical: 10,
+                                                backgroundColor: isActive ? '#1a2138' : item.backgroundColor,
+                                                alignItems: 'center',
+                                                justifyContent: 'space-between',
+                                                flexDirection: 'row'
+                                            }}
+                                        >
+
+                                            <Text style={{
+                                                color: 'white',
+                                                fontSize: 28,
+                                                paddingTop: 10,
+                                                marginRight: 10
+                                            }}>{item.label}</Text>
+
+                                            <Layout
+                                                style={{
+                                                    flexDirection: 'row',
+                                                    alignItems: 'center'
+                                                }}>
+                                                {editMode
+                                                    ? <TouchableOpacity
+                                                        onPress={() => {
+                                                            setClickedSense(item.label);
+                                                            setClickedSenseIndex(index);
+                                                        }}
+                                                    >
+                                                        <Icon name="pencil" style={{ width: 20, height: 20, color: '#e5e5e5', marginRight: 15 }} />
+                                                    </TouchableOpacity>
+                                                    : null
+                                                }
+
+                                                {editMode
+                                                    ? <TouchableOpacity
+                                                        onPressOut={() => {
+                                                            let newData = sensesData.filter(obj => obj.key !== item.key);
+                                                            setSensesData(newData);
+                                                        }}
+                                                    >
+                                                        <Icon name="trash" style={{ width: 20, height: 20, color: '#e5e5e5' }} />
+                                                    </TouchableOpacity>
+                                                    : null
+                                                }
+                                            </Layout>
+                                        </Layout>
+                                    </Layout>
+
+
+
+
+
+                                </Layout>
                             )
                         }}
                         keyExtractor={(item, index) => `draggable-item-${item.key}`}
@@ -237,6 +357,17 @@ const SettingsScreen = ({ navigation }) => {
                         onBackdropPress={toggleAddModal}
                         visible={addItemVisible}>
                         {renderAddItem()}
+                    </Modal>
+
+                    <Modal
+                        allowBackdrop={true}
+                        backdropStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+                        onBackdropPress={() => {
+                            setClickedSense(null)
+                            setClickedSenseIndex(null);
+                        }}
+                        visible={clickedSense === null ? false : true}>
+                        {renderClickedSense()}
                     </Modal>
 
                 </Layout>

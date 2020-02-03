@@ -26,7 +26,7 @@ const sensesData = [
         name: 'Ask'
     },
     {
-        name: 'Atone'
+        name: 'Let Go'
     }
 ];
 
