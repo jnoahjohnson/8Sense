@@ -14,6 +14,13 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 import Header from '../components/Header';
 import SenseContext from '../context/SenseContext';
 
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
+
 const SettingsScreen = ({navigation}) => {
   const {
     timerState,
@@ -313,6 +320,9 @@ const SettingsScreen = ({navigation}) => {
             style={styles.sensesList}
             scrollEnabled={true}
             showsHorizontalScrollIndicator={false}
+            onDragBegin={() =>
+              ReactNativeHapticFeedback.trigger('impactHeavy', options)
+            }
             renderItem={({item, index, drag, isActive}) => {
               const editSense = () => {
                 setClickedSense(item.label);

@@ -4,13 +4,6 @@ import DraggableFlatList from 'react-native-draggable-flatlist';
 import SenseContext from '../context/SenseContext';
 import {Icon, Text} from 'react-native-ui-kitten';
 
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-
-const options = {
-  enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: false,
-};
-
 const SensesList = ({senses, setSenses}) => {
   const [sensesData, setSensesData] = useState(
     senses.map((item, index) => ({
@@ -31,6 +24,9 @@ const SensesList = ({senses, setSenses}) => {
     <View style={{flex: 100}}>
       <DraggableFlatList
         data={sensesData}
+        onDragBegin={() =>
+          ReactNativeHapticFeedback.trigger('impactLight', options)
+        }
         renderItem={({item, index, drag, isActive}) => {
           return (
             <TouchableOpacity
@@ -44,7 +40,6 @@ const SensesList = ({senses, setSenses}) => {
               }}
               onLongPress={() => {
                 drag;
-                ReactNativeHapticFeedback.trigger('impactLight', options);
               }}>
               <Text
                 style={{
