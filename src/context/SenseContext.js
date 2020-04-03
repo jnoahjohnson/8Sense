@@ -46,18 +46,20 @@ export const SenseProvider = ({children}) => {
     setUserTheme(nextTheme);
   };
 
-  const setSenses = data => {
+  const setSenses = async data => {
     setSensesState(data);
-    saveData();
-  };
 
-  const saveData = async () => {
     try {
-      await AsyncStorage.setItem('@storage_Key', JSON.stringify(sensesData));
+      await AsyncStorage.setItem('@storage_Key', JSON.stringify(data));
       console.log('set Data');
+      initializeSenses();
     } catch (e) {
       console.log('Error while saving: ', e);
     }
+  };
+
+  const saveData = async () => {
+    console.log('Empty function, saveData');
   };
 
   const dataIsDifferent = data => {
@@ -75,13 +77,17 @@ export const SenseProvider = ({children}) => {
   };
 
   const initializeSenses = async () => {
-    if (senses === []) {
-      setSensesState(senses);
+    console.log('Initial Senses: ', senses);
+    if (senses.length === 0) {
+      console.log('senses are empty');
+      setSensesState(sensesData);
+      console.log('Senses', senses);
     }
 
     try {
       console.log('initial data : ', senses);
       const data = await AsyncStorage.getItem('@storage_Key');
+      console.log('Data', data);
       if (data !== null) {
         if (dataIsDifferent(data)) {
           setSensesState(JSON.parse(data));
