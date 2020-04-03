@@ -34,7 +34,7 @@ const sensesData = [
 //Formated NameProvider
 export const SenseProvider = ({children}) => {
   const [timerState, setTimerState] = useState({minutes: 2, seconds: 30});
-  const [senses, setSensesState] = useState(sensesData);
+  const [senses, setSensesState] = useState([]);
   const [userTheme, setUserTheme] = useState('dark');
 
   const setTimer = (minutes, seconds) => {
@@ -75,6 +75,10 @@ export const SenseProvider = ({children}) => {
   };
 
   const initializeSenses = async () => {
+    if (senses === []) {
+      setSensesState(senses);
+    }
+
     try {
       console.log('initial data : ', senses);
       const data = await AsyncStorage.getItem('@storage_Key');
