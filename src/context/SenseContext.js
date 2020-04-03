@@ -46,6 +46,10 @@ export const SenseProvider = ({children}) => {
     setUserTheme(nextTheme);
   };
 
+  const resetSenses = () => {
+    setSenses(sensesData);
+  };
+
   const setSenses = async data => {
     setSensesState(data);
 
@@ -160,6 +164,7 @@ export const SenseProvider = ({children}) => {
         senses,
         userTheme,
         setSenses,
+        resetSenses,
       }}>
       {children}
     </SenseContext.Provider>
